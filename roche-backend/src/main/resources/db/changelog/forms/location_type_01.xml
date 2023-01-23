@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/02_DB_BOOT_DATA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <!--  document_type  -->
+    <changeSet id="location_type_search_form" author="admin">
+        <insert tableName="formMeta">
+            <column name="id" value="1"/>
+            <column name="code" value="search-location-type" />
+            <column name="title" value="#location.type.search"/>
+            <column name="is_inline" value="true" />
+            <column name="submit_action" value="v2/location-type/search" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="name" />
+            <column name="type" value="TEXT" />
+            <column name="form_id" value="1" />
+            <column name="span" value="8" />
+            <column name="display_order" value="1" />
+            <column name="label" value="#location.type.name" />
+            <column name="placeholder" value="#location.type.name" />
+            <column name="data_type" value="STRING" />
+            <column name="is_required" value="TRUE"/>
+            <column name="message" value="Please enter &lt;%= name %&gt;" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="search" />
+            <column name="type" value="SUBMIT" />
+            <column name="form_id" value="1" />
+            <column name="span" value="3" />
+            <column name="display_order" value="200" />
+            <column name="label" value="#common.action.search" />
+            <column name="action" value="handleSearchPressed" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="add" />
+            <column name="type" value="button" />
+            <column name="form_id" value="1" />
+            <column name="span" value="3" />
+            <column name="offset" value="10" />
+            <column name="display_order" value="210" />
+            <column name="label" value="#common.action.add" />
+            <column name="action" value="handleAddPressed" />
+        </insert>
+    </changeSet>
+    <changeSet id="location_type_search_meta" author="admin">
+        <insert tableName="searchMeta">
+            <column name="id" value="1" />
+            <column name="entity_name" value="search-location-type" />
+        </insert>
+        <insert tableName="searchConditionMeta">
+            <column name="search_meta_id" value="1" />
+            <column name="name" value="ci_name" />
+            <column name="operator" value="LIKE" />
+            <column name="formatter" value="LOWER_LIKE" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="1" />
+            <column name="title" value="#location.type.name" />
+            <column name="data_index" value="name" />
+            <column name="key" value="name" />
+            <column name="display_order" value="1" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="1" />
+            <column name="title" value="#location.type.parent" />
+            <column name="data_index" value="parent.name" />
+            <column name="key" value="parent.name" />
+            <column name="display_order" value="2" />
+            <column name="render" value="(item,i)=>  i.parent.name" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="1" />
+            <column name="title" value="#location.type.status" />
+            <column name="data_index" value="status" />
+            <column name="key" value="status" />
+            <column name="display_order" value="3" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="1" />
+            <column name="title" value="" />
+            <column name="data_index" value="action" />
+            <column name="key" value="status" />
+            <column name="display_order" value="4" />
+            <column name="render" value="(item,i)=> paintLink(i, ()=> navigate(`/admin/location-type/edit/${i.id}`))" />
+        </insert>
+    </changeSet>
+    <changeSet id="location_type_edit_form" author="admin">
+        <insert tableName="formMeta">
+            <column name="id" value="2"/>
+            <column name="code" value="edit-location-type" />
+            <column name="title" value="#location.type.edit"/>
+            <column name="is_inline" value="false" />
+            <column name="submit_action" value="v2/location-type/" />
+            <column name="init_action" value="v2/location-type/find/&lt;%= id %&gt;" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="name" />
+            <column name="type" value="TEXT" />
+            <column name="form_id" value="2" />
+            <column name="span" value="8" />
+            <column name="display_order" value="10" />
+            <column name="label" value="#location.type.name" />
+            <column name="placeholder" value="#location.type.name" />
+            <column name="data_type" value="STRING" />
+            <column name="is_required" value="TRUE"/>
+            <column name="message" value="Please enter &lt;%= name %&gt;" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="parent" />
+            <column name="type" value="SELECT" />
+            <column name="form_id" value="2" />
+            <column name="span" value="8" />
+            <column name="display_order" value="20" />
+            <column name="label" value="#location.type.parent" />
+            <column name="on_search" value="v2/location-type/all" />
+            <column name="on_change" value="handleChange" />
+            <column name="data_type" value="INT" />
+            <column name="is_required" value="FALSE"/>
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="status" />
+            <column name="type" value="SELECT" />
+            <column name="form_id" value="2" />
+            <column name="span" value="8" />
+            <column name="display_order" value="30" />
+            <column name="label" value="#location.type.status" />
+            <column name="on_search" value="v2/location-type/status" />
+            <column name="on_change" value="handleChange" />
+            <column name="data_type" value="INT" />
+            <column name="is_required" value="TRUE"/>
+            <column name="message" value="Please select &lt;%= status %&gt;" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="submit" />
+            <column name="type" value="SUBMIT" />
+            <column name="form_id" value="2" />
+            <column name="span" value="3" />
+            <column name="offset" value="5" />
+            <column name="display_order" value="200" />
+            <column name="label" value="#common.action.save" />
+            <column name="action" value="handleSavePressed" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

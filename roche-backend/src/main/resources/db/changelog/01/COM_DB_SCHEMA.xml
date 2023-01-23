@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/COM_DB_SCHEMA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="001_lov_master" author="admin">
+        <createTable tableName="lovMaster">
+            <column name="id" type="bigint" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="ci_name" type="varchar(255)"/>
+            <column name="display_order" type="int"/>
+            <column name="type" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Division" author="admin">
+        <createTable tableName="division">
+            <column name="code" type="varchar(50)"/>
+            <column name="is_Active" type="BOOLEAN"/>
+            <column name="created_By" type="BIGINT"/>
+            <column name="updated_By" type="BIGINT"/>
+            <column name="created_On" type="TIMESTAMP"/>
+            <column name="updated_On" type="TIMESTAMP"/>
+            <column name="stale_Id" type="BIGINT"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Location" author="admin">
+        <createTable tableName="location">
+            <column name="parent_id" type="bigint"/>
+            <column name="type_id" type="bigint"/>
+            <column name="division_id" type="bigint"/>
+            <column name="status" type="varchar(50)"/>
+            <column name="pool_Location_id" type="bigint"/>
+            <column name="created_By" type="BIGINT"/>
+            <column name="updated_By" type="BIGINT"/>
+            <column name="created_On" type="TIMESTAMP"/>
+            <column name="updated_On" type="TIMESTAMP"/>
+            <column name="stale_Id" type="BIGINT"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Product" author="admin">
+        <createTable tableName="product">
+            <column name="product_Group_id" type="bigint"/>
+            <column name="status" type="varchar(50)"/>
+            <column name="created_By" type="BIGINT"/>
+            <column name="updated_By" type="BIGINT"/>
+            <column name="created_On" type="TIMESTAMP"/>
+            <column name="updated_On" type="TIMESTAMP"/>
+            <column name="stale_Id" type="BIGINT"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="ProductGroup" author="admin">
+        <createTable tableName="product_group">
+            <column name="status" type="varchar(50)"/>
+            <column name="created_By" type="BIGINT"/>
+            <column name="updated_By" type="BIGINT"/>
+            <column name="created_On" type="TIMESTAMP"/>
+            <column name="updated_On" type="TIMESTAMP"/>
+            <column name="stale_Id" type="BIGINT"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Stockist" author="admin">
+        <createTable tableName="stockist">
+            <column name="code" type="varchar(50)"/>
+            <column name="status_id" type="bigint"/>
+            <column name="created_By" type="BIGINT"/>
+            <column name="updated_By" type="BIGINT"/>
+            <column name="created_On" type="TIMESTAMP"/>
+            <column name="updated_On" type="TIMESTAMP"/>
+            <column name="stale_Id" type="BIGINT"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="StockistLocation" author="admin">
+        <createTable tableName="stockist_location">
+            <column name="stockist_id" type="bigint"/>
+            <column name="location_id" type="bigint"/>
+            <column name="classification_id" type="bigint"/>
+            <column name="created_By" type="BIGINT"/>
+            <column name="updated_By" type="BIGINT"/>
+            <column name="created_On" type="TIMESTAMP"/>
+            <column name="updated_On" type="TIMESTAMP"/>
+            <column name="stale_Id" type="BIGINT"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Notification" author="admin">
+        <createTable tableName="notification">
+            <column name="text" type="varchar(50)"/>
+            <column name="created_By" type="BIGINT"/>
+            <column name="updated_By" type="BIGINT"/>
+            <column name="created_On" type="TIMESTAMP"/>
+            <column name="updated_On" type="TIMESTAMP"/>
+            <column name="stale_Id" type="BIGINT"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="locationType" author="admin">
+    <createTable tableName="locationType">
+        <column name="id" type="bigint" autoIncrement="true">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="name" type="varchar(256)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="ci_name" type="varchar(256)">
+            <constraints nullable="false" unique="true"/>
+        </column>
+        <column name="parent_id" type="bigint"/>
+        <column name="status" type="varchar(20)">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+    </changeSet>
+
+    <changeSet id="Document" author="admin">
+        <createTable tableName="Document">
+            <column name="owner_id" type="BIGINT"/>
+            <column name="file_path" type="varchar(50)"/>
+            <column name="type_id" type="bigint"/>
+            <column name="status_id" type="bigint"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="updated_by" type="BIGINT"/>
+            <column name="created_on" type="TIMESTAMP"/>
+            <column name="updated_on" type="TIMESTAMP"/>
+            <column name="stale_id" type="BIGINT"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

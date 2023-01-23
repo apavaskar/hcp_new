@@ -1,0 +1,31 @@
+package $serviceImplPackageName
+
+import com.squer.prorpel.persistence.SearchCriteria
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
+import $entityPath
+import $repositoryPath
+import $servicePath
+
+@Service
+class $serviceImplName: $serviceName {
+
+@Autowired
+lateinit var entityRepository: $repositoryName
+
+    override fun findById(id: Long): $entityName? {
+        return entityRepository.findById(id)
+    }
+
+    override fun find(criteria: SearchCriteria): List<$entityName>? {
+        return entityRepository.find(criteria)
+    }
+
+    override fun create(entity: $entityName): Long {
+        return entityRepository.create(entity)
+    }
+
+    override fun update(entity: $entityName): Long {
+        return entityRepository.update(entity)
+    }
+}

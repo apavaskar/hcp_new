@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/UPL_SCHEMA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <!--  document_type  -->
+    <changeSet id="InvoiceUploadDocument" author="admin">
+        <createTable tableName="InvoiceUploadDocument">
+            <column name="file_type_id" type="bigint"/>
+            <column name="year_month" type="int"/>
+            <column name="employee_id" type="bigint"/>
+            <column name="location_id" type="bigint"/>
+            <column name="stockist_id" type="bigint"/>
+            <column name="status_id" type="bigint"/>
+            <column name="remark" type="varchar(50)"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="updated_by" type="BIGINT"/>
+            <column name="created_on" type="TIMESTAMP"/>
+            <column name="updated_on" type="TIMESTAMP"/>
+            <column name="stale_id" type="BIGINT"/>
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

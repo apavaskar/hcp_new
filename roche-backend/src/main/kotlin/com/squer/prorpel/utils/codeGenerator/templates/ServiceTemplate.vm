@@ -1,0 +1,11 @@
+package $servicePackageName
+
+import com.squer.prorpel.persistence.SearchCriteria
+import $entityPath
+
+interface $serviceName {
+    fun findById(id: Long): $entityName?
+    fun find(criteria: SearchCriteria): List<$entityName>?
+    fun create(entity: $entityName): Long
+    fun update(entity: $entityName): Long
+}

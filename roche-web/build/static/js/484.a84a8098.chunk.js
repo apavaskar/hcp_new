@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkantd_demo=self.webpackChunkantd_demo||[]).push([[484],{3484:function(n,e,t){t.r(e);t(2791);var u=t(9291),s=t(184);e.default=function(){return(0,s.jsx)(u.Z,{children:"h1. Ant Design"})}}}]);
+//# sourceMappingURL=484.a84a8098.chunk.js.map

@@ -1,0 +1,16 @@
+package $apiPath
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import $controllerPath
+import $servicePath
+
+@RestController
+@RequestMapping("/v2/$entityNameLower")
+@Tag(name = "V2 Upload APIs")
+@SecurityRequirement(name = "bearer-key")
+@CrossOrigin
+class $fileName (entityService: $serviceName): $controllerName (entityService = entityService)

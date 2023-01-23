@@ -1,0 +1,10 @@
+$fieldName{
+
+    override fun getFieldName(): String {
+        return "$fieldNameLower"
+    }
+
+    override fun getField(): Field<Any> {
+        return $jooqFiledName as Field<Any>
+    }
+},

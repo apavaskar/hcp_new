@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/01_DB_SCHEMA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <!--  document_type  -->
+    <changeSet id="001_user" author="admin">
+<!--        <createTable tableName="user">-->
+<!--            <column name="id" type="bigint" autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="username" type="varchar(20)">-->
+<!--                <constraints nullable="false" unique="true"/>-->
+<!--            </column>-->
+<!--            <column name="full_name" type="varchar(256)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="password" type="varchar(256)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="email" type="varchar(256)" >-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="password_changed" type="BOOLEAN" defaultValue="false" />-->
+<!--            <column name="is_external" type="BOOLEAN">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="status" type="varchar(256)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="job_role_id" type="bigint" />-->
+<!--            <column name="designation" type="varchar(50)"/>-->
+<!--            <column name="created_at" type="timestamp" defaultValueDate="current_timestamp"/>-->
+<!--            <column name="created_by" type="bigint" />-->
+<!--            <column name="updated_at" type="timestamp"/>-->
+<!--            <column name="update_by" type="bigint" />-->
+<!--        </createTable>-->
+        <createTable tableName="securityRole">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ci_name" type="varchar(256)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="userSecurityRole">
+            <column name="user_id" type="varchar(37)"></column>
+            <column name="role_id" type="bigint"></column>
+        </createTable>
+    </changeSet>
+    <changeSet id="002_security_privilege" author="admin">
+        <createTable tableName="securityPrivilege">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ci_name" type="varchar(256)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="002_security_role_privilege" author="admin">
+        <createTable tableName="securityRolePrivilege">
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="privilege_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

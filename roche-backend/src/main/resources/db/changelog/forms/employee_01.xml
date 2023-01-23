@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/user_01.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <!--  document_type  -->
+    <changeSet id="employee_search_form" author="admin">
+        <insert tableName="formMeta">
+            <column name="id" value="6"/>
+            <column name="code" value="search-employee" />
+            <column name="title" value="#employee.search"/>
+            <column name="is_inline" value="true" />
+            <column name="submit_action" value="v2/employee/search" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="name" />
+            <column name="type" value="TEXT" />
+            <column name="form_id" value="6" />
+            <column name="span" value="8" />
+            <column name="display_order" value="1" />
+            <column name="label" value="#employee.name" />
+            <column name="placeholder" value="#employee.name" />
+            <column name="data_type" value="STRING" />
+            <column name="is_required" value="TRUE"/>
+            <column name="message" value="Please enter &lt;%= name %&gt;" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="code" />
+            <column name="type" value="TEXT" />
+            <column name="form_id" value="6" />
+            <column name="span" value="8" />
+            <column name="display_order" value="1" />
+            <column name="label" value="#employee.code" />
+            <column name="placeholder" value="#employee.code" />
+            <column name="data_type" value="STRING" />
+            <column name="is_required" value="TRUE"/>
+            <column name="message" value="Please enter &lt;%= code %&gt;" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="search" />
+            <column name="type" value="SUBMIT" />
+            <column name="form_id" value="6" />
+            <column name="span" value="3" />
+            <column name="display_order" value="200" />
+            <column name="label" value="#common.action.search" />
+            <column name="action" value="handleSearchPressed" />
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="add" />
+            <column name="type" value="button" />
+            <column name="form_id" value="6" />
+            <column name="span" value="3" />
+            <column name="offset" value="10" />
+            <column name="display_order" value="210" />
+            <column name="label" value="#common.action.add" />
+            <column name="action" value="handleAddPressed" />
+        </insert>
+    </changeSet>
+    <changeSet id="employee_search_meta" author="admin">
+        <insert tableName="searchMeta">
+            <column name="id" value="3" />
+            <column name="entity_name" value="search-employee" />
+        </insert>
+        <insert tableName="searchConditionMeta">
+            <column name="search_meta_id" value="3" />
+            <column name="name" value="ci_name" />
+            <column name="operator" value="LIKE" />
+            <column name="formatter" value="LOWER_LIKE" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="3" />
+            <column name="title" value="#employee.code" />
+            <column name="data_index" value="code" />
+            <column name="key" value="code" />
+            <column name="display_order" value="1" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="3" />
+            <column name="title" value="#employee.name" />
+            <column name="data_index" value="name" />
+            <column name="key" value="name" />
+            <column name="display_order" value="2" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="3" />
+            <column name="title" value="#employee.jobTitle" />
+            <column name="data_index" value="jobTitle.name" />
+            <column name="key" value="jobTitle.name" />
+            <column name="display_order" value="3" />
+            <column name="render" value="(item,i)=>  i.jobTitle===undefined? '' : i.jobTitle.name" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="3" />
+            <column name="title" value="#employee.location" />
+            <column name="data_index" value="location.name" />
+            <column name="key" value="location.name" />
+            <column name="display_order" value="4" />
+            <column name="render" value="(item,i)=>  i.location===undefined? '' : i.location.name" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="3" />
+            <column name="title" value="#employee.status" />
+            <column name="data_index" value="status.name" />
+            <column name="key" value="status.name" />
+            <column name="display_order" value="5" />
+            <column name="render" value="(item,i)=>  i.status===undefined? '' : i.status.name" />
+        </insert>
+        <insert tableName="searchColumnMeta">
+            <column name="search_meta_id" value="3" />
+            <column name="title" value="" />
+            <column name="data_index" value="action" />
+            <column name="key" value="status" />
+            <column name="display_order" value="6" />
+            <column name="render" value="(item,i)=> paintLink(i, ()=> navigate(`/admin/employee/edit/${i.id}`))" />
+        </insert>
+    </changeSet>
+<!--    <changeSet id="employee_add_form" author="admin">-->
+<!--        <insert tableName="formMeta">-->
+<!--            <column name="id" value="7" />-->
+<!--            <column name="code" value="add-employee"/>-->
+<!--            <column name="title" value="#employee.add"/>-->
+<!--            <column name="num_columns" value="1"/>-->
+<!--            <column name="is_inline" value="false"/>-->
+<!--            <column name="submit_action" value="v2/employee/"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="name" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="span" value="8"/>-->
+<!--            <column name="display_order" value="10" />-->
+<!--            <column name="label" value="#employee.name" />-->
+<!--            <column name="placeholder" value="#employee.name" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="true" />-->
+<!--            <column name="is_enabled" value="" />-->
+<!--            <column name="message" value="Please enter &lt;%= name %&gt;"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="code" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="span" value="8"/>-->
+<!--            <column name="display_order" value="15" />-->
+<!--            <column name="label" value="#employee.code" />-->
+<!--            <column name="placeholder" value="#employee.code" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="true" />-->
+<!--            <column name="message" value="Please enter &lt;%= code %&gt;"/>-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="emailId" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="span" value="8"/>-->
+<!--            <column name="display_order" value="20" />-->
+<!--            <column name="label" value="#employee.emailId" />-->
+<!--            <column name="placeholder" value="#employee.emailId" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="false" />-->
+<!--            <column name="pattern" value=""/>-->
+<!--            <column name="message" value=""/>-->
+<!--            <column name="reference" value=""/>-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="employee_edit_form" author="admin">-->
+<!--        <insert tableName="formMeta">-->
+<!--            <column name="id" value="6"/>-->
+<!--            <column name="code" value="edit-user" />-->
+<!--            <column name="title" value="#user.edit"/>-->
+<!--            <column name="is_inline" value="false" />-->
+<!--            <column name="submit_action" value="v2/user/" />-->
+<!--            <column name="init_action" value="v2/user/find/&lt;%= id %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="username" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="form_id" value="6" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="10" />-->
+<!--            <column name="label" value="#user.username" />-->
+<!--            <column name="placeholder" value="#user.username" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please enter &lt;%= username %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="fullName" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="form_id" value="6" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="20" />-->
+<!--            <column name="label" value="#user.fullName" />-->
+<!--            <column name="placeholder" value="#user.fullName" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please enter &lt;%= fullName %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="jobRole" />-->
+<!--            <column name="type" value="SELECT" />-->
+<!--            <column name="form_id" value="6" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="30" />-->
+<!--            <column name="label" value="#user.jobRole" />-->
+<!--            <column name="on_search" value="v2/job-role/all" />-->
+<!--            <column name="on_change" value="handleChange" />-->
+<!--            <column name="placeholder" value="#user.jobRole" />-->
+<!--            <column name="data_type" value="INT" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please select &lt;%= jobRole %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="status" />-->
+<!--            <column name="type" value="SELECT" />-->
+<!--            <column name="form_id" value="6" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="30" />-->
+<!--            <column name="label" value="#location.type.status" />-->
+<!--            <column name="on_search" value="v2/location/status" />-->
+<!--            <column name="on_change" value="handleChange" />-->
+<!--            <column name="data_type" value="INT" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please select &lt;%= status %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="designation" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="form_id" value="6" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="40" />-->
+<!--            <column name="label" value="#user.designation" />-->
+<!--            <column name="placeholder" value="#user.designation" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="FALSE"/>-->
+<!--            <column name="message" value="Please enter &lt;%= designation %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="locations" />-->
+<!--            <column name="type" value="MULTI_SELECT" />-->
+<!--            <column name="form_id" value="6" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="50" />-->
+<!--            <column name="label" value="#user.locations" />-->
+<!--            <column name="placeholder" value="#user.locations" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="FALSE"/>-->
+<!--            <column name="on_search" value="v2/location/all"/>-->
+<!--            <column name="message" value="Please enter &lt;%= locations %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="submit" />-->
+<!--            <column name="type" value="SUBMIT" />-->
+<!--            <column name="form_id" value="6" />-->
+<!--            <column name="span" value="3" />-->
+<!--            <column name="offset" value="5" />-->
+<!--            <column name="display_order" value="200" />-->
+<!--            <column name="label" value="#common.action.save" />-->
+<!--            <column name="action" value="handleSavePressed" />-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="user_add_form" author="admin">-->
+<!--        <insert tableName="formMeta">-->
+<!--            <column name="id" value="7"/>-->
+<!--            <column name="code" value="add-user" />-->
+<!--            <column name="title" value="#user.add"/>-->
+<!--            <column name="is_inline" value="false" />-->
+<!--            <column name="submit_action" value="v2/user/" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="username" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="10" />-->
+<!--            <column name="label" value="#user.username" />-->
+<!--            <column name="placeholder" value="#user.username" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please enter &lt;%= username %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="fullName" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="20" />-->
+<!--            <column name="label" value="#user.fullName" />-->
+<!--            <column name="placeholder" value="#user.fullName" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please enter &lt;%= fullName %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="jobRole" />-->
+<!--            <column name="type" value="SELECT" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="30" />-->
+<!--            <column name="label" value="#user.jobRole" />-->
+<!--            <column name="on_search" value="v2/job-role/all" />-->
+<!--            <column name="on_change" value="handleChange" />-->
+<!--            <column name="placeholder" value="#user.jobRole" />-->
+<!--            <column name="data_type" value="INT" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please select &lt;%= jobRole %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="status" />-->
+<!--            <column name="type" value="SELECT" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="30" />-->
+<!--            <column name="label" value="#location.type.status" />-->
+<!--            <column name="on_search" value="v2/location/status" />-->
+<!--            <column name="on_change" value="handleChange" />-->
+<!--            <column name="data_type" value="INT" />-->
+<!--            <column name="is_required" value="TRUE"/>-->
+<!--            <column name="message" value="Please select &lt;%= status %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="designation" />-->
+<!--            <column name="type" value="TEXT" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="40" />-->
+<!--            <column name="label" value="#user.designation" />-->
+<!--            <column name="placeholder" value="#user.designation" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="FALSE"/>-->
+<!--            <column name="message" value="Please enter &lt;%= designation %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="locations" />-->
+<!--            <column name="type" value="MULTI_SELECT" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="span" value="8" />-->
+<!--            <column name="display_order" value="50" />-->
+<!--            <column name="label" value="#user.locations" />-->
+<!--            <column name="placeholder" value="#user.locations" />-->
+<!--            <column name="data_type" value="STRING" />-->
+<!--            <column name="is_required" value="FALSE"/>-->
+<!--            <column name="on_search" value="v2/location/all"/>-->
+<!--            <column name="message" value="Please enter &lt;%= locations %&gt;" />-->
+<!--        </insert>-->
+<!--        <insert tableName="formAttributeMeta">-->
+<!--            <column name="name" value="submit" />-->
+<!--            <column name="type" value="SUBMIT" />-->
+<!--            <column name="form_id" value="7" />-->
+<!--            <column name="span" value="3" />-->
+<!--            <column name="offset" value="5" />-->
+<!--            <column name="display_order" value="200" />-->
+<!--            <column name="label" value="#common.action.save" />-->
+<!--            <column name="action" value="handleSavePressed" />-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+</databaseChangeLog>

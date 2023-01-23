@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <include file="01/SEC_DB_SCHEMA.xml" relativeToChangelogFile="true"/>
+<!--    <include file="01/ORG_DB_SCHEMA.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="01/COM_DB_SCHEMA.xml" relativeToChangelogFile="true"/>-->
+    <include file="01/UI_DB_SCHEMA.xml" relativeToChangelogFile="true"/>
+<!--    <include file="01/01_DB_SCHEMA.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="forms/location_type_01.xml" relativeToChangelogFile="true"/>-->
+    <include file="forms/location_01.xml" relativeToChangelogFile="true"/>
+    <include file="forms/employee_01.xml" relativeToChangelogFile="true"/>
+<!--    <include file="forms/user_01.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="01/UPL_SCHEMA.xml" relativeToChangelogFile="true"/>-->
+
+<!--    <include file="01/SEC_DB_BOOT_DATA.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="01/COM_DB_BOOT_DATA.xml" relativeToChangelogFile="true" />-->
+<!--    <include file="01/ORG_DB_BOOT_DATA.xml" relativeToChangelogFile="true"/>-->
+    <include file="01/UI_DB_BOOT_DATA.xml" relativeToChangelogFile="true"/>
+    <include file="01/LBL_DB_BOOT_DATA.xml" relativeToChangelogFile="true"/>
+
+<!--    &lt;!&ndash; Uncomment to use dummy data&ndash;&gt;-->
+<!--    <include file="dummy/01_DB_DUMMY_DATA.xml" relativeToChangelogFile="true"/>-->
+
+</databaseChangeLog>

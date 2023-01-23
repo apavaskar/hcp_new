@@ -1,0 +1,9 @@
+package $enumPackageName
+
+import com.squer.prorpel.jooq.tables.references.$jooqEntity
+import com.squer.prorpel.persistence.SearchField
+import org.jooq.Field
+
+enum class $searchFieldName: SearchField {
+    $enumData
+}

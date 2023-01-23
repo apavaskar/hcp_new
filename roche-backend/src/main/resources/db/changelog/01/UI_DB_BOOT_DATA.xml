@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/01_DB_SCHEMA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <!--  document_type  -->
+    <changeSet id="001_menu_create" author="admin">
+        <insert tableName="menuActions">
+            <column name="id" value="1"/>
+            <column name="name" value="Employee" />
+            <column name="ci_name" value="employee"/>
+            <column name="display_order" value="100"/>
+            <column name="ui_interface" value="web" />
+        </insert>
+        <insert tableName="menuActions">
+            <column name="id" value="2"/>
+            <column name="name" value="Employee Search" />
+            <column name="ci_name" value="employee search"/>
+            <column name="display_order" value="200"/>
+            <column name="path" value="/admin/employee/search"/>
+            <column name="ui_interface" value="web" />
+            <column name="parent_id" value="1" />
+            <column name="privilege_id" value="4" />
+        </insert>
+        <insert tableName="menuActions">
+            <column name="id" value="3"/>
+            <column name="name" value="Location" />
+            <column name="ci_name" value="location"/>
+            <column name="display_order" value="300"/>
+            <column name="ui_interface" value="web" />
+            <column name="privilege_id" value="1" />
+        </insert>
+        <insert tableName="menuActions">
+            <column name="id" value="4"/>
+            <column name="name" value="Location Search" />
+            <column name="ci_name" value="location search"/>
+            <column name="display_order" value="300"/>
+            <column name="path" value="/admin/location/search" />
+            <column name="ui_interface" value="web" />
+            <column name="parent_id" value="3" />
+            <column name="privilege_id" value="1" />
+        </insert>
+    </changeSet>
+<!--    <changeSet id="02_008_user_menu" author="admin">-->
+<!--        <insert tableName="menuActions">-->
+<!--            <column name="id" value="5"/>-->
+<!--            <column name="name" value="User" />-->
+<!--            <column name="ci_name" value="user"/>-->
+<!--            <column name="display_order" value="400"/>-->
+<!--            <column name="path" value="/admin/user/search" />-->
+<!--            <column name="ui_interface" value="web" />-->
+<!--            <column name="parent_id" value="1" />-->
+<!--            <column name="privilege_id" value="1" />-->
+<!--        </insert>-->
+<!--    </changeSet>-->
+</databaseChangeLog>

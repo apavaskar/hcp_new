@@ -1,0 +1,18 @@
+<changeSet id="Document" author="admin">
+<createTable tableName="Document">
+		<column name="owner_id" type="BIGINT"/>
+		<column name="file_path" type="varchar(50)"/>
+		<column name="type_id" type="bigint"/>
+		<column name="status_id" type="bigint"/>
+		<column name="created_by" type="BIGINT"/>
+		<column name="updated_by" type="BIGINT"/>
+		<column name="created_on" type="TIMESTAMP"/>
+		<column name="updated_on" type="TIMESTAMP"/>
+		<column name="stale_id" type="BIGINT"/>
+		<column name="name" type="varchar(50)"/>
+		<column name="ci_name" type="varchar(50)"/>
+		<column name="id" type="bigint" autoIncrement="true"> 
+	<constraints primaryKey="true" nullable="false"/></column>
+	</createTable>
+</changeSet>
+

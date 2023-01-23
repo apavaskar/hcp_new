@@ -1,0 +1,49 @@
+package $controllerPath
+
+import lombok.extern.slf4j.Slf4j
+import com.squer.prorpel.persistence.SearchCriteria
+import com.squer.prorpel.persistence.SearchField
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.http.ResponseEntity
+import $entiityPath
+import $searchFieldPath
+import $servicePath
+
+@Slf4j
+open class $contollerName @Autowired constructor(private val entityService: $serviceName) {
+
+    companion object{
+        val conditionsMap = $searchField
+    }
+
+    @PostMapping("/search")
+    fun search(@RequestBody conditions: Map<String, Any>): ResponseEntity<*> {
+        var criteria = SearchCriteria()
+        conditions.keys.forEach{
+           criteria.addCondition(conditionsMap[it] as SearchField,conditions[it] as Any)
+        }
+        return ResponseEntity.ok(entityService.find(criteria))
+    }
+
+    @GetMapping("/find/{id}")
+    fun findById(@PathVariable("id") id: Long): ResponseEntity<*> {
+        return ResponseEntity.ok<Any>(entityService.findById(id))
+    }
+
+    @PutMapping("/update")
+    fun update(@RequestBody entity: $entityName): ResponseEntity<*> {
+        var id = entityService.update(entity)
+        return findById(id)
+    }
+
+    @PostMapping("/create")
+    fun create(@RequestBody entity: $entityName): ResponseEntity<*> {
+        var id = entityService.create(entity)
+        return findById(id)
+    }
+}

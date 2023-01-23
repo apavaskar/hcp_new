@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/01_DB_SCHEMA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="004_location" author="admin">
+        <insert tableName="division">
+            <column name="id" value="1"></column>
+            <column name="name" value="Test Division" />
+            <column name="ci_name" value="test division"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="2" />
+            <column name="name" value="All India" />
+            <column name="ci_name" value="all india" />
+            <column name="type_id" value="1" />
+            <column name="status" value="ACTIVE" />
+            <column name="division_id" value="1" />
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="3" />
+            <column name="name" value="Test Region" />
+            <column name="ci_name" value="test region" />
+            <column name="type_id" value="2" />
+            <column name="parent_id" value="2"/>
+            <column name="status" value="ACTIVE" />
+            <column name="division_id" value="1" />
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="4" />
+            <column name="name" value="Test Area" />
+            <column name="ci_name" value="test area" />
+            <column name="type_id" value="3" />
+            <column name="parent_id" value="3"/>
+            <column name="status" value="ACTIVE" />
+            <column name="division_id" value="1" />
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="5" />
+            <column name="name" value="Test Location" />
+            <column name="ci_name" value="test location" />
+            <column name="type_id" value="4" />
+            <column name="parent_id" value="4"/>
+            <column name="status" value="ACTIVE" />
+            <column name="division_id" value="1" />
+        </insert>
+    </changeSet>
+    <changeSet id="
+    005_user" author="">
+        <insert tableName="user">
+            <column name="id" value="2" />
+            <column name="username" value="9930614995"/>
+            <column name="full_name" value="Ashutosh Pavaskar" />
+            <column name="password" value="$2a$12$npcEbtAZuvs9gX7PqRCHquUjMl6rr/iJM8mGU5Us4lI3Vq5ALpiBK"/>
+            <column name="is_external" value="false" />
+            <column name="job_role_id" value="5" />
+            <column name="designation" value="TM" />
+            <column name="email" value="ashutosh@squer.co.in"/>
+            <column name="status" value="ACTIVE" />
+            <column name="created_by" value="1" />
+            <column name="created_at" value="2022-08-07" />
+        </insert>
+        <insert tableName="userLocation">
+            <column name="user_id" value="2" />
+            <column name="location_id" value="4" />
+        </insert>
+    </changeSet>
+    <!--changeSet id="stockist" author="admin">
+        <insert tableName="location">
+            <column name="name" value="Test Pool Location" />
+            <column name="ci_name" value="test pool location" />
+            <column name="type_id" value="6" />
+            <column name="status" value="ACTIVE" />
+            <column name="division_id" value="1" />
+        </insert>
+    </changeSet-->
+</databaseChangeLog>

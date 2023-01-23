@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/01_DB_SCHEMA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="005_menu_actions" author="admin">
+        <createTable tableName="menuActions">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+            <column name="ci_name" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="display_order" type="int" />
+            <column name="path" type="varchar(256)"/>
+            <column name="parent_id" type="bigint"/>
+            <column name="ui_interface" type="varchar(10)"/>
+            <column name="privilege_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="02_004_formMeta" author="admin">
+        <createTable tableName="labelMeta">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(25)"/>
+            <column name="label" type="varchar(255)" />
+            <column name="is_default" type="boolean" />
+        </createTable>
+        <createTable tableName="formMeta">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(50)" />
+            <column name="title" type="varchar(25)"/>
+            <column name="sub_title" type="varchar(25)"/>
+            <column name="num_columns" type="int" defaultValue="1" />
+            <column name="is_inline" type="boolean" defaultValue="false" />
+            <column name="submit_action" type="varchar(255)"/>
+            <column name="init_action" type="varchar(255)"/>
+        </createTable>
+        <createTable tableName="formAttributeMeta">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)" />
+            <column name="form_id" type="bigint" />
+            <column name="type" type="varchar(50)" />
+            <column name="span" type="int" />
+            <column name="offset" type="int" />
+            <column name="display_order" type="int"/>
+            <column name="label" type="varchar(255)" />
+            <column name="placeholder" type="varchar(255)" />
+            <column name="action" type="varchar(255)" />
+            <column name="on_select" type="varchar(255)" />
+            <column name="on_search" type="varchar(255)" />
+            <column name="on_change" type="varchar(255)" />
+            <column name="default_value" type="varchar(255)" />
+            <column name="data_type" type="varchar(25)"/>
+            <column name="is_required" type="boolean" />
+            <column name="is_enabled" type="boolean" />
+            <column name="min_value" type="varchar(255)" />
+            <column name="max_value" type="varchar(255)" />
+            <column name="min_length" type="int" />
+            <column name="max_length" type="int" />
+            <column name="pattern" type="varchar(255)" />
+            <column name="message" type="varchar(255)" />
+            <column name="reference" type="varchar(50)" />
+        </createTable>
+    </changeSet>
+    <changeSet id="02_005_search_meta" author="admin">
+        <createTable tableName="searchMeta">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="entity_name" type="varchar(100)"/>
+        </createTable>
+        <createTable tableName="searchConditionMeta">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="search_meta_id" type="bigint" />
+            <column name="name" type="varchar(50)"/>
+            <column name="operator" type="varchar(50)"/>
+            <column name="formatter" type="varchar(50)"/>
+        </createTable>
+        <createTable tableName="searchColumnMeta">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="search_meta_id" type="bigint" />
+            <column name="title" type="varchar(50)" />
+            <column name="data_index" type="varchar(50)" />
+            <column name="key" type="varchar(50)" />
+            <column name="render" type="text" />
+            <column name="display_order" type="int" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

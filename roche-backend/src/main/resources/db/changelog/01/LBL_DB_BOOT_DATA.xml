@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db/changelog/01/LBL_DB_BOOT_DATA.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <!--  document_type  -->
+
+    <changeSet id="02_005_labels" author="admin">
+        <customChange class="com.squer.prorpel.installer.LabelInstaller">
+            <param name="file" value="common_01_labels" />
+        </customChange>
+    </changeSet>
+    <changeSet id="02_006_labels" author="admin">
+        <customChange class="com.squer.prorpel.installer.LabelInstaller">
+            <param name="file" value="location_types_01_labels" />
+        </customChange>
+    </changeSet>
+    <changeSet id="02_007_labels" author="admin">
+        <customChange class="com.squer.prorpel.installer.LabelInstaller">
+            <param name="file" value="location_01_labels" />
+        </customChange>
+    </changeSet>
+    <changeSet id="02_009_labels" author="admin">
+        <customChange class="com.squer.prorpel.installer.LabelInstaller">
+            <param name="file" value="user_01_labels" />
+        </customChange>
+    </changeSet>
+    <changeSet id="02_010_labels" author="admin">
+        <customChange class="com.squer.prorpel.installer.LabelInstaller">
+            <param name="file" value="employee_01_labels" />
+        </customChange>
+    </changeSet>
+</databaseChangeLog>
