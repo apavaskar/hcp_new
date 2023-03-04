@@ -18,7 +18,7 @@ import org.jooq.ForeignKey
 import org.jooq.Name
 import org.jooq.Record
 import org.jooq.Records
-import org.jooq.Row20
+import org.jooq.Row21
 import org.jooq.Schema
 import org.jooq.SelectField
 import org.jooq.Table
@@ -170,6 +170,11 @@ open class CmeVendorEventReport(
      */
     val EVENT_ID: TableField<CmeVendorEventReportRecord, String?> = createField(DSL.name("event_id"), SQLDataType.CHAR(37), this, "")
 
+    /**
+     * The column <code>public.cme_vendor_event_report.old_created_by</code>.
+     */
+    val OLD_CREATED_BY: TableField<CmeVendorEventReportRecord, String?> = createField(DSL.name("old_created_by"), SQLDataType.VARCHAR(37), this, "")
+
     private constructor(alias: Name, aliased: Table<CmeVendorEventReportRecord>?): this(alias, null, null, aliased, null)
     private constructor(alias: Name, aliased: Table<CmeVendorEventReportRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, aliased, parameters)
 
@@ -212,18 +217,18 @@ open class CmeVendorEventReport(
     override fun rename(name: Table<*>): CmeVendorEventReport = CmeVendorEventReport(name.getQualifiedName(), null)
 
     // -------------------------------------------------------------------------
-    // Row20 type methods
+    // Row21 type methods
     // -------------------------------------------------------------------------
-    override fun fieldsRow(): Row20<LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?> = super.fieldsRow() as Row20<LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?>
+    override fun fieldsRow(): Row21<LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?, String?> = super.fieldsRow() as Row21<LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?, String?>
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    fun <U> mapping(from: (LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?) -> U): SelectField<U> = convertFrom(Records.mapping(from))
+    fun <U> mapping(from: (LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?, String?) -> U): SelectField<U> = convertFrom(Records.mapping(from))
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    fun <U> mapping(toType: Class<U>, from: (LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?) -> U): SelectField<U> = convertFrom(toType, Records.mapping(from))
+    fun <U> mapping(toType: Class<U>, from: (LocalDate?, String?, Int?, String?, String?, Int?, String?, Int?, Int?, Int?, String?, Double?, String?, String?, String?, String?, OffsetDateTime?, String?, OffsetDateTime?, String?, String?) -> U): SelectField<U> = convertFrom(toType, Records.mapping(from))
 }

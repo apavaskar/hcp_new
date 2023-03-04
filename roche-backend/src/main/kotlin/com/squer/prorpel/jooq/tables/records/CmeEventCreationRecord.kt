@@ -157,10 +157,14 @@ open class CmeEventCreationRecord() : TableRecordImpl<CmeEventCreationRecord>(Cm
         set(value): Unit = set(31, value)
         get(): Int? = get(31) as Int?
 
+    open var oldCreatedBy: String?
+        set(value): Unit = set(32, value)
+        get(): String? = get(32) as String?
+
     /**
      * Create a detached, initialised CmeEventCreationRecord
      */
-    constructor(id: String? = null, doctors: Int? = null, supportStaff: Int? = null, approvalComment: String? = null, createdBy: String? = null, eventVenue: String? = null, noOfDoctor: Int? = null, eventDate: OffsetDateTime? = null, status: String? = null, others: Int? = null, staleId: String? = null, comment: String? = null, dne: Int? = null, groupId: String? = null, updatedBy: String? = null, actionBy: String? = null, currentStatus: String? = null, eventTopic: String? = null, updatedOn: OffsetDateTime? = null, createdOn: OffsetDateTime? = null, eventTypeId: String? = null, advancedRequest: Double? = null, eventNo: Int? = null, product: String? = null, percent: Double? = null, oldEventDate: OffsetDateTime? = null, paidAdvancedRequest: Double? = null, transactionDate: OffsetDateTime? = null, transactionDetail: String? = null, abortedReason: String? = null, conductedDate: LocalDateTime? = null, isConducted: Int? = null): this() {
+    constructor(id: String? = null, doctors: Int? = null, supportStaff: Int? = null, approvalComment: String? = null, createdBy: String? = null, eventVenue: String? = null, noOfDoctor: Int? = null, eventDate: OffsetDateTime? = null, status: String? = null, others: Int? = null, staleId: String? = null, comment: String? = null, dne: Int? = null, groupId: String? = null, updatedBy: String? = null, actionBy: String? = null, currentStatus: String? = null, eventTopic: String? = null, updatedOn: OffsetDateTime? = null, createdOn: OffsetDateTime? = null, eventTypeId: String? = null, advancedRequest: Double? = null, eventNo: Int? = null, product: String? = null, percent: Double? = null, oldEventDate: OffsetDateTime? = null, paidAdvancedRequest: Double? = null, transactionDate: OffsetDateTime? = null, transactionDetail: String? = null, abortedReason: String? = null, conductedDate: LocalDateTime? = null, isConducted: Int? = null, oldCreatedBy: String? = null): this() {
         this.id = id
         this.doctors = doctors
         this.supportStaff = supportStaff
@@ -193,5 +197,6 @@ open class CmeEventCreationRecord() : TableRecordImpl<CmeEventCreationRecord>(Cm
         this.abortedReason = abortedReason
         this.conductedDate = conductedDate
         this.isConducted = isConducted
+        this.oldCreatedBy = oldCreatedBy
     }
 }

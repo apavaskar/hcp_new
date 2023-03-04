@@ -39,8 +39,10 @@ export const hideSpinner = () => (dispatch) => {
     })
 }
 
-export const globalFailAction = () => dispatch => {
+export const globalFailAction = (payload) => dispatch => {
     dispatch({
-        type: GLOBAL_FAIL_ACTION
+        type: GLOBAL_FAIL_ACTION,
+        payload: payload,
+
     })
 }

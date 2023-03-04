@@ -5,7 +5,7 @@ import com.squer.prorpel.persistence.StandardEntity
 
 class Doctor: StandardEntity() {
     var code: String ?= null
-    var status: NamedReference? = null
+    var statusReference: NamedReference? = null
     var location: NamedReference ?= null
     var classification: NamedReference ?= null
     var externalId: String ?= null

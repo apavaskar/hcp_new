@@ -6,18 +6,19 @@ import javax.naming.Name
 
 class DoctorMaster: StandardEntity() {
     var email: String?= null
-    var doctor: NamedReference ?= null
+    var doctorReference: NamedReference ?= null
     var phone: String?= null
     var sfdcNumber: String ?= null
     var gst: String ?= null
     var pancardNo: String ?= null
-    var actionBy: NamedReference ?= null
-    var specialization: NamedReference ?= null
-    var status: NamedReference ?= null
-    var currentStatus: NamedReference ?= null
+    var actionByReference: NamedReference ?= null
+    var specializationReference: NamedReference ?= null
+    var statusReference: NamedReference ?= null
+    var currentStatusReference: NamedReference ?= null
     var approvalComment: String ?= null
     var groupId: String ?= null
+    var oldCreatedBy: String ?= null
 
-    var approvalId: String?= null
-    var action: NamedReference ?= null
+//    var approvalId: String?= null
+//    var action: NamedReference ?= null
 }

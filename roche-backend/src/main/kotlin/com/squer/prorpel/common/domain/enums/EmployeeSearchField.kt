@@ -23,5 +23,41 @@ enum class EmployeeSearchField: SearchField {
         override fun getField(): Field<Any> {
             return CMT_EMPLOYEE.CODE as Field<Any>
         }
-    }
+    },
+    STATUS{
+        override fun getFieldName(): String {
+            return "status"
+        }
+
+        override fun getField(): Field<Any> {
+            return CMT_EMPLOYEE.STATUS_ID as Field<Any>
+        }
+    },
+    EMAIL_ID{
+        override fun getFieldName(): String {
+            return "email_id"
+        }
+
+        override fun getField(): Field<Any> {
+            return CMT_EMPLOYEE.EMAIL_ID as Field<Any>
+        }
+    },
+    LOCATION_ID{
+        override fun getFieldName(): String {
+            return "location_id"
+        }
+
+        override fun getField(): Field<Any> {
+            return CMT_EMPLOYEE.LOCATION_ID as Field<Any>
+        }
+    },
+    JOB_TITLE_ID{
+        override fun getFieldName(): String {
+            return "job_title_id"
+        }
+
+        override fun getField(): Field<Any> {
+            return CMT_EMPLOYEE.JOB_TITLE_ID as Field<Any>
+        }
+    },
 }

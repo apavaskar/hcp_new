@@ -21,14 +21,15 @@ const initialState = {
     newMeta:[],
     selectResult: {},
     formInitValues: {},
-    formInitialized: false
+    formInitialized: false,
+    success: false
 }
 
 const getFormMetaSuccessReducer = (state = initialState, payload) => {
     return {
         ...state,
         formMeta: payload.meta,
-        formInitialized: true
+        formInitialized: true,
     }
 }
 
@@ -52,6 +53,7 @@ const commonSaveMetaSuccessReducer = (state = initialState, payload) => {
     return {
         ...state,
         saveMeta: payload.saveMetaResult,
+        success: true
     }
 }
 
@@ -59,6 +61,7 @@ const commonNewMetaSuccessReducer = (state = initialState, payload) => {
     return {
         ...state,
         newMeta: payload.newMetaResult,
+        success: true
     }
 }
 
@@ -89,6 +92,11 @@ const commonSearchResetReducer = (state = initialState, payload) => {
     return initialState
 }
 
+const globalFailReducer = (state = initialState, payload) => {
+    return {
+        success: false
+    }
+}
 
 export default createReducer(initialState, {
     [GET_FORM_META_SUCCESS]: getFormMetaSuccessReducer,

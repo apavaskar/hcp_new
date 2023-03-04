@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 @Repository
 class UserRepository: BaseRepository<User>() {
@@ -21,7 +22,11 @@ class UserRepository: BaseRepository<User>() {
     private lateinit var dslContext: DSLContext
 
     override fun create(entity: User): String {
-        TODO("Not yet implemented")
+        val result = dslContext.insertInto(FMK_SECURITY_USER, FMK_SECURITY_USER.ID,FMK_SECURITY_USER.USER_PASSWORD,FMK_SECURITY_USER.STATUS_ID,FMK_SECURITY_USER.USER_NAME, FMK_SECURITY_USER.OWNER_ID, FMK_SECURITY_USER.CREATED_BY, FMK_SECURITY_USER.CREATED_ON, FMK_SECURITY_USER.UPDATED_BY, FMK_SECURITY_USER.UPDATED_ON)
+                .values(generateGUID("USERS"),entity.password,entity.status?.id!!,entity.userName, entity.owner?.id!!, getCreator().id!!, OffsetDateTime.now(), getCreator().id!!, OffsetDateTime.now() )
+                .returningResult(FMK_SECURITY_USER.ID)
+                .fetchOne()
+        return result?.get(FMK_SECURITY_USER.ID)!!
     }
 
     override fun delete(id: String): String? {
@@ -66,22 +71,14 @@ class UserRepository: BaseRepository<User>() {
     }
 
     override fun update(entity: User): String {
-        TODO("Not yet implemented")
-
-//        dslContext.update(USER)
-//            .set(USER.USERNAME, entity.username)
-//            .set(USER.PASSWORD, entity.password)
-//            .set(USER.FULL_NAME, entity.fullName)
-//            .set(USER.STATUS, entity.status)
-//            .set(USER.IS_EXTERNAL, entity.external)
-//            .set(USER.EMAIL, entity.email)
-//            .set(USER.PASSWORD_CHANGED, entity.passwordChanged)
-//            .set(USER.UPDATE_BY, entity.updatedBy)
-//            .set(USER.UPDATED_AT, LocalDateTime.now())
-//            .where(USER.ID
-//                .eq(entity.id))
-//            .execute()
-//        return entity.id!!
+        dslContext.update(FMK_SECURITY_USER)
+            .set(FMK_SECURITY_USER.USER_NAME, entity.userName)
+            .set(FMK_SECURITY_USER.STATUS_ID, entity.status?.id)
+            .set(FMK_SECURITY_USER.UPDATED_BY, getCreator().id)
+            .set(FMK_SECURITY_USER.UPDATED_ON, OffsetDateTime.now())
+            .where(FMK_SECURITY_USER.ID.eq(entity.id))
+            .execute()
+        return entity.id!!
     }
 
     fun findLocationsForUser(id: Long) : List<Location> {

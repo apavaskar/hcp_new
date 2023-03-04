@@ -1,6 +1,8 @@
 export const AUTH_CERTIFICATE = 'Authorization'
 //export const BASE_URL = 'https://ascensia.squer.co.in'
-export const BASE_URL = 'http://localhost:8080'
+export const BASE_URL = 'http://localhost:8090'
+
+//export const BASE_URL = 'http://165.22.214.28:8090'
 
 export const FORM_META_API = {url: 'v2/form-meta/by-code/<%= code %>', method: 'GET', auth: true}
 export const SEARCH_API = {url: '<%= searchAPI %>', method: 'POST', auth: true}

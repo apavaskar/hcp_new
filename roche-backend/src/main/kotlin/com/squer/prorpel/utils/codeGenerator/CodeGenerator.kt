@@ -9,8 +9,7 @@ import java.util.*
 
 class CodeGenerator {
     companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
+        fun main2(args: Array<String>) {
             var className = args[0]
             var fieldList = mutableMapOf<String, String>()
             var searchFiledMap = mutableMapOf<String, String>()

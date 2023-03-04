@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { selectAuthInfo } from '../redux/selectors/authSelectors'
-import {message} from 'antd';
+import {message, notification} from 'antd';
 import {selectMessage, selectShowMessage} from "../redux/selectors/globalSelectors";
 import {resetMessageAction} from "../redux/actions/global/GlobalActions";
 import PortletWrapperComponent from "../components/portlet/PortletWrapperComponent";
@@ -35,7 +35,11 @@ const RootNavigator = ({ authInfo, showMessage, messageObj, handleResetMessage }
         return
     }
     if (messageObj.type === 'error') {
-        message.error({content: messageObj.text, style: {width: '50%', height: 30, marginRight: '5vh'}})
+        //message.error({content: messageObj.text, style: {width: '50%', height: 30, marginRight: '5vh'}})
+        notification['error']({
+            message: 'Error',
+            description: messageObj.text,
+        });
     }
     if (messageObj.type === 'success') {
         message.success({content: messageObj.text, style: {width: '50%', height: 30, marginRight: '5vh'}})

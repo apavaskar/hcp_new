@@ -11,7 +11,7 @@ export const selectSearchStartEpic = (action$) =>
         switchMap((action) =>
             searchMetaRequests(action.payload).pipe(
                 map((searchMetaResults) => commonSearchMetaSuccessAction({searchMetaResult: searchMetaResults.response})),
-                catchError((error) => of(globalFailAction({error: error}))),
+                catchError((error) => of(({error: error}))),
             ),
         ),
     )

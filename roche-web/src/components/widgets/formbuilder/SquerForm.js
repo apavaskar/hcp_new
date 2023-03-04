@@ -4,7 +4,7 @@ import {template} from "lodash";
 import SelectField from "./SelectField";
 import MultiSelectField from "./MultiSelectField";
 
-const SquerForm = ({meta, actions, initialValues}) => {
+const SquerForm = ({meta, actions, initialValues, selectResults}) => {
     const [form] = Form.useForm()
     if (meta === undefined || meta.attributes === undefined) {
         return <></>
@@ -18,7 +18,7 @@ const SquerForm = ({meta, actions, initialValues}) => {
             <Form
                 form={form}
                 onFinish={onFinish}
-                labelCol={{span: 6}}
+                labelCol={{span: 10}}
                 layout={meta.inline ? 'inline' : 'horizontal'}
                 initialValues={initialValues}
             >
@@ -30,7 +30,8 @@ const SquerForm = ({meta, actions, initialValues}) => {
                     let validations = []
                     if (element.validations) {
                         const validation = element.validations
-                        const message = template(validation.message)({[element.name]: element.props.label})
+
+                    const message = template(validation.message)({[element.name.replace('.','_')]: element.props.label})
                         if (validation.isRequired === true) {
                             validations.push({required: true, message: message})
                         }
@@ -44,7 +45,7 @@ const SquerForm = ({meta, actions, initialValues}) => {
                                    style={{width: `calc(${w}%)`}}
                                    name={element.name}
                                    label={element.type === 'SUBMIT' || element.type === 'button' ? null : element.props.label}>
-                            <FormElement type={element.type} element={element} actions={actions}/>
+                            <FormElement type={element.type} element={element} actions={actions} selectResults={selectResults}/>
                         </Form.Item>
                     )
                 })}
@@ -53,10 +54,10 @@ const SquerForm = ({meta, actions, initialValues}) => {
     );
 }
 
-const FormElement = ({type, element, actions, onChange, value}) => {
+const FormElement = ({type, element, actions, onChange, value, selectResults}) => {
     switch (type.toUpperCase()) {
         case 'TEXT':
-            return <Input placeholder={element.props.placeholder} onChange={onChange} value={value}/>
+            return <Input placeholder={element.props.placeholder} onChange={onChange} value={value} disabled={element.validations.isEnabled == null ? false: element.validations.isEnabled}/>
         case 'SUBMIT':
             return <Button type={'primary'} htmlType="submit">{element.props.label}</Button>
         case 'BUTTON':
@@ -64,7 +65,7 @@ const FormElement = ({type, element, actions, onChange, value}) => {
             return <Button onClick={actions[element.props.action]}>{element.props.label}</Button>
         case 'SELECT':
             console.log(element)
-            return <SelectField name={element.name} init={element.onSearch} onChange={onChange} value={value}/>
+            return <SelectField name={element.name} init={element.onSearch} onChange={onChange} value={value} disabled={element.validations.isEnabled} selectResult={selectResults}/>
         case 'MULTI_SELECT':
             return <MultiSelectField name={element.name} init={element.onSearch} onChange={onChange} value={value}/>
         default:

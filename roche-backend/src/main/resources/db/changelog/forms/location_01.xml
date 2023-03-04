@@ -227,5 +227,47 @@
             <column name="action" value="handleAddPressed" />
         </insert>
     </changeSet>
+    <changeSet id="location_url" author="admin">
+        <update tableName="formAttributeMeta">
+            <column name="on_search" value="v2/location/allWithType"/>
+            <where>name='parent.id' and form_id=4</where>
+        </update>
+        <update tableName="formAttributeMeta">
+            <column name="on_search" value="v2/location/allWithType"/>
+            <where>name='parent' and form_id=5</where>
+        </update>
+    </changeSet>
+    <changeSet id="add_division_row" author="admin">
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="division" />
+            <column name="type" value="SELECT" />
+            <column name="form_id" value="5" />
+            <column name="span" value="8" />
+            <column name="display_order" value="40" />
+            <column name="label" value="#location.division" />
+            <column name="on_search" value="v2/division/all" />
+            <column name="on_change" value="handleChange" />
+            <column name="data_type" value="INT" />
+            <column name="is_required" value="TRUE"/>
+        </insert>
+        <insert tableName="formAttributeMeta">
+            <column name="name" value="division" />
+            <column name="type" value="SELECT" />
+            <column name="form_id" value="4" />
+            <column name="span" value="8" />
+            <column name="display_order" value="40" />
+            <column name="label" value="#location.division" />
+            <column name="on_search" value="v2/division/all" />
+            <column name="on_change" value="handleChange" />
+            <column name="data_type" value="INT" />
+            <column name="is_required" value="TRUE"/>
+        </insert>
+    </changeSet>
+    <changeSet id="division_edit_update" author="admin">
+        <update tableName="formAttributeMeta">
+            <column name="name" value="division.id" />
+            <where>name='division' and form_id=4</where>
+        </update>
+    </changeSet>
 
 </databaseChangeLog>

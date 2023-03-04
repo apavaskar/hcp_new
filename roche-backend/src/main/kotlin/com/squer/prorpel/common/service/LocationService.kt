@@ -15,4 +15,7 @@ interface LocationService {
     fun saveLocation(entity: Location): String
 
     fun createLocation(entity: LocationDTO): String
+
+    fun hoLocations(): List<Location>
+   // fun findAllParentsForLocation(locationId: String): List<Location>
 }

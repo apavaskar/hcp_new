@@ -48,29 +48,49 @@ class DoctorMasterServiceImpl: DoctorMasterService {
 
     }
 
+    override fun updateCreatedBy(oldId: String, newId: String) {
+         doctorMasterRepository.updateCreatedBy(oldId, newId)
+    }
+
+    override fun updateUpdatedBy(oldId: String, newId: String) {
+         doctorMasterRepository.updateUpdatedBy(oldId, newId)
+    }
+
+    override fun updateActionBy(oldId: String, newId: String) {
+         doctorMasterRepository.updateActionBy(oldId, newId)
+    }
+
+    override fun updateOldCreatedBy(userId: String) {
+        doctorMasterRepository.updateOldCreatedBy(userId)
+    }
+
+    override fun find(criteria: SearchCriteria): List<DoctorMaster>{
+        return doctorMasterRepository.find(criteria)
+    }
+
     fun getCmeDoctor(cmeDoctor: DoctorMaster, doctorMasterDTO: DoctorMasterDTO): DoctorMasterDTO{
         doctorMasterDTO.id = cmeDoctor.id
         doctorMasterDTO.name = cmeDoctor.name
         doctorMasterDTO.email = cmeDoctor.email
-        doctorMasterDTO.doctor = cmeDoctor.doctor
+        doctorMasterDTO.doctor = cmeDoctor.doctorReference
         doctorMasterDTO.phone = cmeDoctor.phone
         doctorMasterDTO.sfdcNumber = cmeDoctor.sfdcNumber
         doctorMasterDTO.gst = cmeDoctor.gst
         doctorMasterDTO.pancardNo = cmeDoctor.pancardNo
-        doctorMasterDTO.actionBy = cmeDoctor.actionBy
-        doctorMasterDTO.status = cmeDoctor.status
-        doctorMasterDTO.specialization = cmeDoctor.specialization
+        doctorMasterDTO.actionBy = cmeDoctor.actionByReference
+        doctorMasterDTO.status = cmeDoctor.statusReference
+        doctorMasterDTO.specialization = cmeDoctor.specializationReference
         //doctorMasterDTO.location = cme
-        doctorMasterDTO.approvalId = cmeDoctor.approvalId
+        //doctorMasterDTO.approvalId = cmeDoctor.approvalId
         doctorMasterDTO.actionDate = cmeDoctor.updatedOn?.getLong(ChronoField.DAY_OF_YEAR)
         doctorMasterDTO.initiatedDate = cmeDoctor.createdOn?.getLong(ChronoField.DAY_OF_YEAR)
         doctorMasterDTO.initiatedBy = employeeRepository.getEmployeeReference(cmeDoctor.createdBy!!)
         doctorMasterDTO.groupId = cmeDoctor.groupId
         doctorMasterDTO.approvalComment = cmeDoctor.approvalComment
-        if (cmeDoctor.status?.id.equals("SYSLVCMEDCTRFLSTS00000000000000000003")) {
+        if (cmeDoctor.statusReference?.id.equals("SYSLVCMEDCTRFLSTS00000000000000000003")) {
             doctorMasterDTO.isRejected = true
         }
-        doctorMasterDTO.currentStatus = cmeDoctor.currentStatus
+        doctorMasterDTO.currentStatus = cmeDoctor.currentStatusReference
         return doctorMasterDTO
     }
 

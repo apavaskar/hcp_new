@@ -35,7 +35,7 @@ export const getFormMetaStartEpic = (action$) =>
         switchMap((action) =>
             formMetaRequests(action.payload).pipe(
                 map((formMeta) => getFormMetaSuccessAction({meta: formMeta.response})),
-                catchError((error) => of(globalFailAction({error: error}))),
+                //catchError((error) => of(globalFailAction({error: error}))),
             ),
         ),
     )
@@ -46,7 +46,7 @@ export const commonSearchMetaStartEpic = (action$) =>
         switchMap((action) =>
             searchMetaRequests(action.payload).pipe(
                 map((searchMetaResults) => commonSearchMetaSuccessAction({searchMetaResult: searchMetaResults.response})),
-                catchError((error) => of(globalFailAction({error: error}))),
+                //catchError((error) => of(({error: error}))),
             ),
         ),
     )

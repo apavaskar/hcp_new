@@ -8,6 +8,7 @@ const selectResult = state => state.common.selectResult
 const initValues = state => state.common.formInitValues
 const saveMeta = state => state.common.saveMeta
 const newMeta = state => state.common.newMeta
+const success = state => state.common.success
 
 export const selectFormMeta = createSelector(formMeta, (formMetaSelect) => formMetaSelect)
 export const selectSearchMeta = createSelector(searchMeta, (searchMetaSelect) => searchMetaSelect)
@@ -16,3 +17,4 @@ export const selectSelectResult = createSelector(selectResult, (selectResultSele
 export const selectFormInitValues = createSelector(initValues, (initValuesSelect) => initValuesSelect)
 export const selectSaveMeta = createSelector(saveMeta, (saveMetaSelect) => saveMetaSelect)
 export const selectNewMeta = createSelector(newMeta, (newMetaSelect) => newMetaSelect)
+export const selectSuccess = createSelector(success, (successSelect) => successSelect)

@@ -16,5 +16,5 @@ enum class DoctorSearchField: SearchField {
             val cd = CMT_DOCTOR.`as`("cd")
             return cd.LOCATION_ID as Field<Any>
         }
-    }
+    },
 }

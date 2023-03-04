@@ -226,6 +226,11 @@ open class CmeEventCreation(
      */
     val IS_CONDUCTED: TableField<CmeEventCreationRecord, Int?> = createField(DSL.name("is_conducted"), SQLDataType.INTEGER, this, "")
 
+    /**
+     * The column <code>public.cme_event_creation.old_created_by</code>.
+     */
+    val OLD_CREATED_BY: TableField<CmeEventCreationRecord, String?> = createField(DSL.name("old_created_by"), SQLDataType.VARCHAR(37), this, "")
+
     private constructor(alias: Name, aliased: Table<CmeEventCreationRecord>?): this(alias, null, null, aliased, null)
     private constructor(alias: Name, aliased: Table<CmeEventCreationRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, aliased, parameters)
 

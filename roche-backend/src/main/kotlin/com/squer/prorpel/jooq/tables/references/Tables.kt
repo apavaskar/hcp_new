@@ -51,6 +51,7 @@ import com.squer.prorpel.jooq.tables.CmtChemist
 import com.squer.prorpel.jooq.tables.CmtDivision
 import com.squer.prorpel.jooq.tables.CmtDoctor
 import com.squer.prorpel.jooq.tables.CmtEmployee
+import com.squer.prorpel.jooq.tables.CmtEmployeeHistory
 import com.squer.prorpel.jooq.tables.CmtEmployeeOld
 import com.squer.prorpel.jooq.tables.CmtFtmLocationMapping
 import com.squer.prorpel.jooq.tables.CmtJobTitle
@@ -403,6 +404,11 @@ val CMT_DOCTOR: CmtDoctor = CmtDoctor.CMT_DOCTOR
  * The table <code>public.cmt_employee</code>.
  */
 val CMT_EMPLOYEE: CmtEmployee = CmtEmployee.CMT_EMPLOYEE
+
+/**
+ * The table <code>public.cmt_employee_history</code>.
+ */
+val CMT_EMPLOYEE_HISTORY: CmtEmployeeHistory = CmtEmployeeHistory.CMT_EMPLOYEE_HISTORY
 
 /**
  * The table <code>public.cmt_employee_old</code>.

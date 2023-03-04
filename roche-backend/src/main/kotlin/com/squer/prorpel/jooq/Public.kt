@@ -54,6 +54,7 @@ import com.squer.prorpel.jooq.tables.CmtChemist
 import com.squer.prorpel.jooq.tables.CmtDivision
 import com.squer.prorpel.jooq.tables.CmtDoctor
 import com.squer.prorpel.jooq.tables.CmtEmployee
+import com.squer.prorpel.jooq.tables.CmtEmployeeHistory
 import com.squer.prorpel.jooq.tables.CmtEmployeeOld
 import com.squer.prorpel.jooq.tables.CmtFtmLocationMapping
 import com.squer.prorpel.jooq.tables.CmtJobTitle
@@ -433,6 +434,11 @@ open class Public : SchemaImpl("public", DefaultCatalog.DEFAULT_CATALOG) {
      * The table <code>public.cmt_employee</code>.
      */
     val CMT_EMPLOYEE: CmtEmployee get() = CmtEmployee.CMT_EMPLOYEE
+
+    /**
+     * The table <code>public.cmt_employee_history</code>.
+     */
+    val CMT_EMPLOYEE_HISTORY: CmtEmployeeHistory get() = CmtEmployeeHistory.CMT_EMPLOYEE_HISTORY
 
     /**
      * The table <code>public.cmt_employee_old</code>.
@@ -1076,6 +1082,7 @@ open class Public : SchemaImpl("public", DefaultCatalog.DEFAULT_CATALOG) {
         CmtDivision.CMT_DIVISION,
         CmtDoctor.CMT_DOCTOR,
         CmtEmployee.CMT_EMPLOYEE,
+        CmtEmployeeHistory.CMT_EMPLOYEE_HISTORY,
         CmtEmployeeOld.CMT_EMPLOYEE_OLD,
         CmtFtmLocationMapping.CMT_FTM_LOCATION_MAPPING,
         CmtJobTitle.CMT_JOB_TITLE,

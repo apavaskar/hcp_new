@@ -46,8 +46,10 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
-	compileOnly("org.jasypt:jasypt:1.9.2")
-	compileOnly("commons-codec:commons-codec:1.15")
+	implementation("org.jasypt:jasypt:1.9.2")
+	implementation("commons-codec:commons-codec:1.15")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.reflections:reflections:0.10.2")
 }
 
 tasks.withType<KotlinCompile> {

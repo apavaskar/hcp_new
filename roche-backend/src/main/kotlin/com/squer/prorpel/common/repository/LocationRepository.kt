@@ -1,6 +1,7 @@
 package com.squer.prorpel.common.repository
 
 import com.squer.prorpel.common.domain.Location
+import com.squer.prorpel.jooq.tables.references.CMT_DIVISION
 import com.squer.prorpel.jooq.tables.references.CMT_LOCATION
 import com.squer.prorpel.jooq.tables.references.CMT_ORGANIZATION_HEIRARCHY
 import com.squer.prorpel.jooq.tables.references.FMK_SYSTEM_LOV
@@ -35,20 +36,23 @@ class LocationRepository: BaseRepository<Location>() {
         val child = CMT_LOCATION.`as`("child")
         val parent = CMT_LOCATION.`as`("parent")
         val baseSelect = dslContext.select(child.asterisk(),
-                child.HEIRARCHY_ID.`as`("heirarchy.id"),
+                child.HEIRARCHY_ID.`as`("heirarchy.id"), CMT_ORGANIZATION_HEIRARCHY.NAME.`as`("heirarchy.name"),
                 child.PARENT_ID.`as`("parent.id"), parent.NAME.`as`("parent.name"),
+                child.DIVISION_ID.`as`("division.id"), CMT_DIVISION.NAME.`as`("division.name") ,
                 child.STATUS_ID.`as`("status.id"))
                 .from(child)
-                .leftOuterJoin(parent).on(child.PARENT_ID.eq(parent.ID))
+                .leftOuterJoin(parent).on(parent.ID.eq(child.PARENT_ID))
+                .leftJoin(CMT_DIVISION).on(CMT_DIVISION.ID.eq(child.DIVISION_ID))
+                .leftJoin(CMT_ORGANIZATION_HEIRARCHY).on(CMT_ORGANIZATION_HEIRARCHY.ID.eq(child.HEIRARCHY_ID))
                 .where(child.ID.eq(id))
         return baseSelect.fetchOneInto(Location::class.java)
 
     }
 
     override fun create(entity: Location): String {
-        val result = dslContext.insertInto(CMT_LOCATION, CMT_LOCATION.ID, CMT_LOCATION.NAME, CMT_LOCATION.STATUS_ID, CMT_LOCATION.HEIRARCHY_ID,
+        val result = dslContext.insertInto(CMT_LOCATION, CMT_LOCATION.ID, CMT_LOCATION.NAME, CMT_LOCATION.STATUS_ID, CMT_LOCATION.PARENT_ID, CMT_LOCATION.HEIRARCHY_ID, CMT_LOCATION.DIVISION_ID,
                 CMT_LOCATION.CI_NAME, CMT_LOCATION.CREATED_ON, CMT_LOCATION.CREATED_BY, CMT_LOCATION.UPDATED_ON, CMT_LOCATION.UPDATED_BY)
-                .values(generateGUID("LOCAT"), entity.name!!, entity.status?.id!!, entity.heirarchy?.id!!, entity.name.lowercase(),
+                .values(generateGUID("LOCAT"), entity.name!!, entity.status?.id!!, entity.parent?.id, entity.heirarchy?.id!!, entity.division?.id!!, entity.name.lowercase(),
                          OffsetDateTime.now() ,getCreator().id!!, OffsetDateTime.now() ,getCreator().id!!)
                 .returningResult(CMT_LOCATION.ID)
                 .fetchOne()
@@ -59,8 +63,10 @@ class LocationRepository: BaseRepository<Location>() {
          dslContext.update(CMT_LOCATION)
                 .set(CMT_LOCATION.NAME, entity.name)
                 .set(CMT_LOCATION.CI_NAME, lower(entity.name))
+                .set(CMT_LOCATION.DIVISION_ID, entity.division?.id)
                 .set(CMT_LOCATION.STATUS_ID, entity.status?.id)
                 .set(CMT_LOCATION.HEIRARCHY_ID, entity.heirarchy?.id)
+                 .set(CMT_LOCATION.PARENT_ID, entity.parent?.id)
                 .set(CMT_LOCATION.UPDATED_ON, OffsetDateTime.now())
                 .set(CMT_LOCATION.UPDATED_BY, getCreator().id!!)
                 .where(CMT_LOCATION.ID.eq(entity.id))
@@ -75,16 +81,45 @@ class LocationRepository: BaseRepository<Location>() {
     override fun find(criteria: SearchCriteria): List<Location> {
         val location = CMT_LOCATION.`as`("child")
         val parent = CMT_ORGANIZATION_HEIRARCHY.`as`("parent")
+        val parent1 = CMT_LOCATION.`as`("parent1")
         val status = FMK_SYSTEM_LOV.`as`("status")
        // val pool = CMT_LOCATION.`as`("pool")
         val baseSelect = dslContext.select(location.asterisk(),
             location.HEIRARCHY_ID.`as`("heirarchy.id"), parent.NAME.`as`("heirarchy.name"),
-                location.STATUS_ID.`as`("status.id"), FMK_SYSTEM_LOV.NAME.`as`("status.name"))
+                location.STATUS_ID.`as`("status.id"), FMK_SYSTEM_LOV.NAME.`as`("status.name"),
+                location.PARENT_ID.`as`("parent.id"), parent1.NAME.`as`("parent.name"),
+                location.DIVISION_ID.`as`("division.id"), CMT_DIVISION.NAME.`as`("division.name"))
             .from(location)
-            .innerJoin(FMK_SYSTEM_LOV).on(FMK_SYSTEM_LOV.ID.eq(location.STATUS_ID))
-            .innerJoin(CMT_ORGANIZATION_HEIRARCHY).on(CMT_ORGANIZATION_HEIRARCHY.ID.eq(location.HEIRARCHY_ID))
-            .leftOuterJoin(parent).on(location.HEIRARCHY_ID.eq(parent.ID))
+            .leftJoin(FMK_SYSTEM_LOV).on(FMK_SYSTEM_LOV.ID.eq(location.STATUS_ID))
+            //.innerJoin(CMT_ORGANIZATION_HEIRARCHY).on(CMT_ORGANIZATION_HEIRARCHY.ID.eq(location.HEIRARCHY_ID))
+            .leftJoin(parent).on(parent.ID.eq(location.HEIRARCHY_ID))
+                .leftJoin(parent1).on(parent1.ID.eq(location.PARENT_ID))
+                .leftJoin(CMT_DIVISION).on(CMT_DIVISION.ID.eq(location.DIVISION_ID))
             .where(getConditions(criteria))
+                .orderBy(location.NAME.asc())
+        return baseSelect.fetchInto(Location::class.java)
+    }
+
+     fun hoLocations(): List<Location> {
+         var listOfHo = listOf("ORGHY00000000000000000000000000000005", "ORGHY00000000000000000000000000000006", "ORGHY00000000000000000000000000000007")
+        val location = CMT_LOCATION.`as`("child")
+        val parent = CMT_ORGANIZATION_HEIRARCHY.`as`("parent")
+        val parent1 = CMT_LOCATION.`as`("parent1")
+        val status = FMK_SYSTEM_LOV.`as`("status")
+        // val pool = CMT_LOCATION.`as`("pool")
+        val baseSelect = dslContext.select(location.asterisk(),
+                location.HEIRARCHY_ID.`as`("heirarchy.id"), parent.NAME.`as`("heirarchy.name"),
+                location.STATUS_ID.`as`("status.id"), FMK_SYSTEM_LOV.NAME.`as`("status.name"),
+                location.PARENT_ID.`as`("parent.id"), parent1.NAME.`as`("parent.name"),
+                location.DIVISION_ID.`as`("division.id"), CMT_DIVISION.NAME.`as`("division.name"))
+                .from(location)
+                .leftJoin(FMK_SYSTEM_LOV).on(FMK_SYSTEM_LOV.ID.eq(location.STATUS_ID))
+                //.innerJoin(CMT_ORGANIZATION_HEIRARCHY).on(CMT_ORGANIZATION_HEIRARCHY.ID.eq(location.HEIRARCHY_ID))
+                .leftJoin(parent).on(parent.ID.eq(location.HEIRARCHY_ID))
+                .leftJoin(parent1).on(parent1.ID.eq(location.PARENT_ID))
+                .leftJoin(CMT_DIVISION).on(CMT_DIVISION.ID.eq(location.DIVISION_ID))
+                .where(location.HEIRARCHY_ID.`in`(listOfHo))
+                .orderBy(location.NAME.asc())
         return baseSelect.fetchInto(Location::class.java)
     }
 

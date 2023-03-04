@@ -6,4 +6,5 @@ class LocationDTO {
     var heirarchy: String ?= null
     var status: String ?= null
     var parent: String ?= null
+    var division: String ?= null
 }

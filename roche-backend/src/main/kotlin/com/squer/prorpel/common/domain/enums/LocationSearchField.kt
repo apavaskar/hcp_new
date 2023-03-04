@@ -17,7 +17,7 @@ enum class LocationSearchField: SearchField {
     },
     STATUS{
         override fun getFieldName(): String {
-            return "status"
+            return "status_id"
         }
 
         override fun getField(): Field<Any> {
@@ -27,6 +27,42 @@ enum class LocationSearchField: SearchField {
     TYPE_ID{
         override fun getFieldName(): String {
             return "type_id"
+        }
+
+        override fun getField(): Field<Any> {
+            return  CMT_LOCATION.`as`("child").HEIRARCHY_ID as Field<Any>
+        }
+    },
+    ID{
+        override fun getFieldName(): String {
+            return "id"
+        }
+
+        override fun getField(): Field<Any> {
+            return  CMT_LOCATION.`as`("child").ID as Field<Any>
+        }
+    },
+    PARENT_ID{
+        override fun getFieldName(): String {
+            return "parent_id"
+        }
+
+        override fun getField(): Field<Any> {
+            return  CMT_LOCATION.`as`("child").PARENT_ID as Field<Any>
+        }
+    },
+    CI_NAME{
+        override fun getFieldName(): String {
+            return "ci_name"
+        }
+
+        override fun getField(): Field<Any> {
+            return  CMT_LOCATION.`as`("child").CI_NAME as Field<Any>
+        }
+    },
+    HEIRARCHY_ID{
+        override fun getFieldName(): String {
+            return "heirarchy_id"
         }
 
         override fun getField(): Field<Any> {

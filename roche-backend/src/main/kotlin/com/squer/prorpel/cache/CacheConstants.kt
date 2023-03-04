@@ -14,4 +14,13 @@ enum class CacheConstants: CacheableConstants{
             return TypedJsonJacksonCodec(String::class.java, FormMetaPOJO::class.java, jacksonObjectMapper())
         }
     },
+    SEARCH_CONDITION_META {
+        override fun getCacheName(): String {
+            return "SEARCH_CONDITION_META"
+        }
+
+        override fun getCodec(): TypedJsonJacksonCodec {
+            return TypedJsonJacksonCodec(String::class.java, FormMetaPOJO::class.java, jacksonObjectMapper())
+        }
+    }
 }

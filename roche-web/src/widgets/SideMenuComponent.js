@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react'
 import { setPageTitle, uiMenuStartAction } from '../redux/actions/ui/uiActions'
 import { useNavigate } from 'react-router-dom'
 
-const SideMenuComponent = ({ menus, authInfo, handleLoadMenus, handleMenuClicked }) => {
+const SideMenuComponent = ({ menus, authInfo, handleLoadMenus, handleMenuClicked, handleResetFormMeta }) => {
   const navigate = useNavigate()
   useEffect(() => {
     handleLoadMenus({

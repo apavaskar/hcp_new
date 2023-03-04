@@ -18,12 +18,41 @@ enum class DoctorMasterSearchField : SearchField{
     },
     SPECIALIZATION{
         override fun getFieldName(): String {
-            return "specialization"
+            return "specializationReference"
         }
 
         override fun getField(): Field<Any> {
             val cdm = CME_DOCTOR_MASTER.`as`("cdm")
             return cdm.SPECIALIZATION as Field<Any>
         }
-    }
+    },
+    CREATED_BY{
+        override fun getFieldName(): String {
+            return "created_by"
+        }
+
+        override fun getField(): Field<Any> {
+            val cdm = CME_DOCTOR_MASTER.`as`("cdm")
+            return cdm.CREATED_BY as Field<Any>
+        }
+    },
+    CREATED_BY_CDM{
+        override fun getFieldName(): String {
+            return "created_by"
+        }
+
+        override fun getField(): Field<Any> {
+            return CME_DOCTOR_MASTER.CREATED_BY as Field<Any>
+        }
+    },
+    UPDATED_BY_CDM{
+        override fun getFieldName(): String {
+            return "updated_by"
+        }
+
+        override fun getField(): Field<Any> {
+            return CME_DOCTOR_MASTER.UPDATED_BY as Field<Any>
+        }
+    },
+
 }

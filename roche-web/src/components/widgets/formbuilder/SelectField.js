@@ -6,22 +6,30 @@ import {connect} from "react-redux";
 import {commonSelectStartAction} from "../../../redux/actions/common/commonActions";
 import {selectSelectResult} from "../../../redux/selectors/commonSelectors";
 
-const SelectField = ({onChange, handleInitSelect, init, name, authInfo, selectResult, value}) => {
-    console.log(value)
-    useEffect(() => {
-        handleInitSelect({
-            api: init,
-            certificate: authInfo.certificate,
-            name: name
-        })
-    }, [name])
-
+const SelectField = ({onChange, handleInitSelect, init, name, authInfo, selectResult, value, disabled}) => {
+    // console.log(value)
+    // useEffect(() => {
+    //     handleInitSelect({
+    //         api: init,
+    //         certificate: authInfo.certificate,
+    //         name: name
+    //     })
+    // }, [name])
+    if (selectResult === undefined) {
+        return <></>
+    }
 
     return <Select
         style={{width: '100%'}}
         onChange={onChange}
         value={(value && value.id) ? value.id : value}
-        options={selectResult[name]}
+        options={selectResult[name] || []}
+        disabled={disabled == null ? false: disabled}
+        optionFilterProp="children"
+        showSearch
+        filterOption={(input, option) => (option?.label.toLowerCase() ?? '').includes(input.toLowerCase())}
+        filterSort={(optionA, optionB) =>
+            (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())}
     />
 }
 
@@ -36,8 +44,8 @@ SelectField.propTypes = {
 
 const mapState = (state) => {
     const authInfo = selectAuthInfo(state)
-    const selectResult = selectSelectResult(state)
-    return {authInfo, selectResult}
+
+    return {authInfo}
 }
 
 const actions = {

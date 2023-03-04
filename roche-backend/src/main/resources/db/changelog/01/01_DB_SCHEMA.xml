@@ -30,7 +30,7 @@
             <column name="created_by" type="bigint" />
             <column name="updated_at" type="timestamp"/>
             <column name="update_by" type="bigint" />
-        </createTable>
+        </createTable>-->
         <createTable tableName="securityRole">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -46,7 +46,7 @@
             <column name="user_id" type="bigint"></column>
             <column name="role_id" type="bigint"></column>
         </createTable>
-    </changeSet>-->
+    </changeSet>
     <changeSet id="002_security_privilege" author="admin">
         <createTable tableName="securityPrivilege">
             <column name="id" type="bigint" autoIncrement="true">
@@ -70,7 +70,7 @@
             </column>
         </createTable>
     </changeSet>
-    <!--<changeSet id="005_menu_actions" author="admin">
+    <changeSet id="005_menu_actions" author="admin">
         <createTable tableName="menuActions">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -85,7 +85,7 @@
             <column name="ui_interface" type="varchar(10)"/>
             <column name="privilege_id" type="bigint"/>
         </createTable>
-    </changeSet>-->
+    </changeSet>
     <changeSet id="013_list_of_values" author="admin">
         <createTable tableName="listOfValues">
             <column name="id" type="bigint" autoIncrement="true">

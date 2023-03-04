@@ -13,5 +13,14 @@ enum class UserSearchField: SearchField {
         override fun getField(): Field<Any> {
             return FMK_SECURITY_USER.USER_NAME as Field<Any>
         }
+    },
+    OWNER_ID{
+        override fun getFieldName(): String {
+            return "owner_id"
+        }
+
+        override fun getField(): Field<Any> {
+            return FMK_SECURITY_USER.OWNER_ID as Field<Any>
+        }
     };
 }

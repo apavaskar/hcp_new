@@ -17,7 +17,7 @@ import org.jooq.ForeignKey
 import org.jooq.Name
 import org.jooq.Record
 import org.jooq.Records
-import org.jooq.Row21
+import org.jooq.Row22
 import org.jooq.Schema
 import org.jooq.SelectField
 import org.jooq.Table
@@ -174,6 +174,11 @@ open class CmeVendorMaster(
      */
     val CREDIT_DAY: TableField<CmeVendorMasterRecord, Int?> = createField(DSL.name("credit_day"), SQLDataType.INTEGER, this, "")
 
+    /**
+     * The column <code>public.cme_vendor_master.old_created_by</code>.
+     */
+    val OLD_CREATED_BY: TableField<CmeVendorMasterRecord, String?> = createField(DSL.name("old_created_by"), SQLDataType.VARCHAR(37), this, "")
+
     private constructor(alias: Name, aliased: Table<CmeVendorMasterRecord>?): this(alias, null, null, aliased, null)
     private constructor(alias: Name, aliased: Table<CmeVendorMasterRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, aliased, parameters)
 
@@ -214,18 +219,18 @@ open class CmeVendorMaster(
     override fun rename(name: Table<*>): CmeVendorMaster = CmeVendorMaster(name.getQualifiedName(), null)
 
     // -------------------------------------------------------------------------
-    // Row21 type methods
+    // Row22 type methods
     // -------------------------------------------------------------------------
-    override fun fieldsRow(): Row21<String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?> = super.fieldsRow() as Row21<String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?>
+    override fun fieldsRow(): Row22<String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?, String?> = super.fieldsRow() as Row22<String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?, String?>
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    fun <U> mapping(from: (String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?) -> U): SelectField<U> = convertFrom(Records.mapping(from))
+    fun <U> mapping(from: (String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?, String?) -> U): SelectField<U> = convertFrom(Records.mapping(from))
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    fun <U> mapping(toType: Class<U>, from: (String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?) -> U): SelectField<U> = convertFrom(toType, Records.mapping(from))
+    fun <U> mapping(toType: Class<U>, from: (String?, OffsetDateTime?, String?, String?, String?, OffsetDateTime?, String?, String?, String?, String?, Long?, String?, String?, String?, String?, String?, String?, String?, String?, String?, Int?, String?) -> U): SelectField<U> = convertFrom(toType, Records.mapping(from))
 }

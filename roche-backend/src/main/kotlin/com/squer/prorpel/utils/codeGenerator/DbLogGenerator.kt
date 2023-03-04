@@ -4,8 +4,7 @@ import java.io.File
 
 class DbLogGenerator {
     companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
+        fun main1(args: Array<String>) {
             var file = File("/Users/megha/new-propel/roche-backend/src/main/kotlin/com/squer/prorpel/utils/codeGenerator/db.txt")
             var str = ""
             args.forEach {

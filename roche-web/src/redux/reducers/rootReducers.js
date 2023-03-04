@@ -8,6 +8,8 @@ import effortReportReducer from "./effortReportReducer";
 import expenseReducer from "./expenseReducer";
 import portletReducer from "./portletReducer";
 import CommonReducer from "./commonReducer";
+import EmployeeReducer from "./employeeReducer";
+
 const rootReducer = combineReducers({
   auth: authReducer,
   ui: uiReducer,
@@ -17,7 +19,8 @@ const rootReducer = combineReducers({
   effortReport: effortReportReducer,
   expense: expenseReducer,
   portlet: portletReducer,
-  common: CommonReducer
+  common: CommonReducer,
+  employee: EmployeeReducer
 })
 
 export default rootReducer
